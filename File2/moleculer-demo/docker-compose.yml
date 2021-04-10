@@ -30,6 +30,31 @@ services:
       - nats
     networks:
       - internal
+  
+      greeterReplica:
+        build:
+          context: .
+        image: moleculer-demo-replica
+        env_file: docker-compose.env
+        environment:
+          SERVICES: greeter
+        depends_on:
+          - nats
+        networks:
+          - internal
+#running: npm run dc::up
+#result: dynamic nodeID in payload (helper)
+          helperService:
+            build:
+              context: .
+            image: moleculer-demo-helper
+            env_file: docker-compose.env
+            environment:
+              SERVICES: helper
+            depends_on:
+              - nats
+            networks:
+              - internal
 
   nats:
     image: nats:2
