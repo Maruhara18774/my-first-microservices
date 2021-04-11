@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "sequelize": "^6.6.2"
+    "sequelize": "^6.6.2",
+    "sequelize-auto": "^0.8.2",
+    "tedious": "^11.0.7"
   }
 }

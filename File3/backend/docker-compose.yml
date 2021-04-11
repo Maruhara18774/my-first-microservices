@@ -4,12 +4,12 @@ services:
 
   user-db:
     image: mcr.microsoft.com/mssql/server:2017-latest
-    container-name: demo_todos_userDB
+    restart: always
     ports:
         - "1400:1433"
     environment:
         ACCEPT_EULA : "Y"
-        PASSWORD : "P@ssw0rd"
+        SA_PASSWORD : "!Passw0rd"
     networks: 
         - todos-backend
 networks:

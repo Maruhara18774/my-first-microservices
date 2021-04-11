@@ -45,8 +45,8 @@ module.exports = {
                 }
                 // Create account
                 
-                // 11 44 45
-                // sequelize-auto -o "./src/models" -d <database> -u <user> -x [password] -p [port]  --dialect [dialect] -c [/path/to/config] -o [/path/to/models] -t [tableName]
+                // localhost - 1400 
+                // npx sequelize-auto -h localhost -d RENTALAPARTMENT -u sa -x !Passw0rd -p 1400 -e mssql -o "./src/models"    
 				return true;
 			}
 		},
