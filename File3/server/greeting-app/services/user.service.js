@@ -4,6 +4,9 @@
  * @typedef {import('moleculer').Context} Context Moleculer's Context
  */
 const {MoleculerError} = require('moleculer').Errors;
+const dbContext = require('../src/DBContext')();
+
+
 
 module.exports = {
 	name: "user",
@@ -36,18 +39,25 @@ module.exports = {
 				path: "/signin"
 			},
             params: {
-                username: {type="string", min=3},
-                password: {type="string", min=6}
+                username: {type:"string", min:3},
+                password: {type:"string", min:6}
             },
 			async handler({action,params,meta, ... ctx}) {
+				const {username, password} = params;
                 if(!username && !password){
                     throw new MoleculerError("Người dùng đã tồn tại!");
                 }
+				// Test 1: http://localhost:3000/api/user/signin?username=demo1&password=abc123
+				const createUser = await dbContext.TAIKHOAN.create({
+					TEN_TAIKHOAN: username,
+					MATKHAU: password,
+					ROLE_TAIKHOAN: "User"
+				})
                 // Create account
-                
+                // 1 54 28
                 // localhost - 1400 
                 // npx sequelize-auto -h localhost -d RENTALAPARTMENT -u sa -x !Passw0rd -p 1400 -e mssql -o "./src/models"    
-				return true;
+				return createUser;
 			}
 		},
 
@@ -86,7 +96,6 @@ module.exports = {
 	 * Service created lifecycle event handler
 	 */
 	created() {
-
 	},
 
 	/**
